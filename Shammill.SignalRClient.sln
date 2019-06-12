@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shammill.SignalRClient", "Shammill.SignalRClient\Shammill.SignalRClient.csproj", "{AA913D71-1D00-4820-B00D-B826107DADC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA913D71-1D00-4820-B00D-B826107DADC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA913D71-1D00-4820-B00D-B826107DADC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA913D71-1D00-4820-B00D-B826107DADC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA913D71-1D00-4820-B00D-B826107DADC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {748613A6-3BE3-492E-BF52-454DC31F5F42}
+	EndGlobalSection
+EndGlobal
