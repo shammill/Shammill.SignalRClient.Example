@@ -42,8 +42,11 @@ namespace Shammill.SignalRClient
             connection = new HubConnectionBuilder()
                 .WithUrl("http://localhost:60742/signalr", options =>
                 {
-                    //options.AccessTokenProvider = () => Task.FromResult(userId),
+
+                    var cookie = new Cookie("userId", userId, "/", "localhost");
                     options.Credentials = new Credential();
+                    options.Cookies.Add(cookie);
+                    options.Headers.Add("myUser", userId);
                 })
                 .Build();
         }
@@ -86,6 +89,12 @@ namespace Shammill.SignalRClient
             {
                 Console.WriteLine("Connected To Hub, Connection Id:");
                 Console.WriteLine($"{connectionId}");
+                connection.SendAsync("AddToGroup", userId);
+            });
+
+            connection.On<string>("AddedToGroup", (message) =>
+            {
+                Console.WriteLine($"I was added to group {message}");
             });
         }
 
@@ -106,7 +115,8 @@ namespace Shammill.SignalRClient
             public NetworkCredential GetCredential(Uri uri, string authType) {
                 return new NetworkCredential {
                     UserName = userId,
-                    Domain = "localhost"
+                    Domain = "localhost",
+                    Password = "abc"
                 };
             }
         }
