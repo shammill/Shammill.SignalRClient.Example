@@ -9,8 +9,14 @@ namespace Shammill.SignalRClientExample.SignalR
 {
     public class SignalRClient
     {
+        public static class ConnectionDetails
+        {
+            public static string ConnectionId { get; set;}
+            public static string UserId { get; set;}
+        }
+
         public HubConnection Connection { get; set; } = null;
-        public string UserId { get; set; } = "";
+        public string UserId { get; set; } = "354d9e59-198e-485f-bd66-c58bb4978a0e"; // Guid.NewGuid().ToString();
 
         public SignalRClient()
         {
@@ -38,10 +44,15 @@ namespace Shammill.SignalRClientExample.SignalR
         {
             Connection.Closed += async (error) =>
             {
+                ConnectionDetails.ConnectionId = null;
                 Console.WriteLine("Connection to SignalR Hub closed.");
 
-                await Task.Delay(new Random().Next(0, 5) * 1000);
-                await Connection.StartAsync();
+                while (Connection.State == HubConnectionState.Disconnected)
+                {
+                    Console.WriteLine("Attempting reconnect to SignalR Hub");
+                    await Task.Delay(new Random().Next(3, 6) * 1000);
+                    await Connection.StartAsync().ContinueWith(x => Console.WriteLine($"Connection Start Result: {Connection.State}"));
+                }
             };
 
             Connection.On<HubMessage>("LobbyUpdated", (message) =>
@@ -73,6 +84,7 @@ namespace Shammill.SignalRClientExample.SignalR
                 Console.WriteLine("Connected To Hub, Connection Id:");
                 Console.WriteLine($"{connectionId}");
                 Connection.SendAsync("AddToGroup", UserId);
+                ConnectionDetails.ConnectionId = connectionId;
             });
 
             Connection.On<string>("AddedToGroup", (message) =>

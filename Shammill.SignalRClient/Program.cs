@@ -7,12 +7,12 @@ namespace Shammill.SignalRClientExample
 {
     class Program
     {
-        public SignalRClient signalRClient;
+        static SignalRClient signalRClient;
         static bool startUp = true;
         static string userId = "1114fe29-4724-4194-87ce-37baeb58a38d";
 
 
-        void Main(string[] args)
+        static void Main(string[] args)
         {
             StartUp();
 
@@ -23,7 +23,7 @@ namespace Shammill.SignalRClientExample
             }
         }
 
-        public void StartUp()
+        public static void StartUp()
         {
             if (startUp)
             {
