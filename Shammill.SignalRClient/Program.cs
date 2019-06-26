@@ -1,4 +1,5 @@
 ﻿using Shammill.SignalRClientExample.SignalR;
+using Shammill.SignalRClientExample.Input;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -16,11 +17,7 @@ namespace Shammill.SignalRClientExample
         {
             StartUp();
 
-            while (true)
-            {
-                Console.ReadKey();
-                Console.WriteLine($"State: {signalRClient.Connection.State}");
-            }
+            InputHandler.HandleInput(signalRClient);
         }
 
         public static void StartUp()
@@ -31,7 +28,5 @@ namespace Shammill.SignalRClientExample
                 startUp = false;
             }
         }
-
-
     }
 }
