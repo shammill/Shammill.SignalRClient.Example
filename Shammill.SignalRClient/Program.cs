@@ -10,7 +10,6 @@ namespace Shammill.SignalRClientExample
     {
         static SignalRClient signalRClient;
         static bool startUp = true;
-        static string userId = "1114fe29-4724-4194-87ce-37baeb58a38d";
 
 
         static void Main(string[] args)

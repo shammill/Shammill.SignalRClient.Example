@@ -36,7 +36,7 @@ namespace Shammill.SignalRClientExample.SignalR
         public void CreateSignalRClient()
         {
             Connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:60742/signalr", options => { })
+                .WithUrl(Configuration.SignalRUrl, options => { })
                 .Build();
         }
 
@@ -98,6 +98,12 @@ namespace Shammill.SignalRClientExample.SignalR
             Console.WriteLine($"State: { Connection.State}");
             Console.WriteLine($"Start connecting to hub.");
             Connection.StartAsync().ContinueWith(x => Console.WriteLine($"Connection Start Result: {Connection.State}"));
+        }
+
+
+        public void AddToSignalRGroup(string group)
+        {
+            Connection.SendAsync("AddToGroup", group);
         }
     }
 }
