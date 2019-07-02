@@ -67,6 +67,12 @@ namespace Shammill.SignalRClientExample.SignalR
                 Console.WriteLine($"{message}");
             });
 
+            Connection.On<HubMessage>("LobbyDeleted", (message) =>
+            {
+                Console.WriteLine("Got Lobby Deleted Message From SignalR Hub");
+                Console.WriteLine($"{message.content}");
+            });
+
             Connection.On<HubMessage>("PlayerAddedToLobby", (message) =>
             {
                 Console.WriteLine("Got Player Added To Lobby Message From SignalR Hub");

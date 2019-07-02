@@ -48,11 +48,13 @@ namespace Shammill.SignalRClientExample.HttpClient
         public static bool Delete(Guid lobbyId)
         {
             var client = new RestClient(Configuration.ApiUrl);
-            var request = new RestRequest("lobbies", Method.DELETE);
+            var request = new RestRequest("lobbies/" + lobbyId.ToString(), Method.DELETE);
 
-            request.AddParameter("lobbyId", lobbyId);
+            //request.AddParameter("lobbyId", lobbyId);
 
-            return client.Execute<bool>(request).Data;
+            var response = client.Execute<bool>(request);
+            var success = response.Data;
+            return success;
         }
 
     }
