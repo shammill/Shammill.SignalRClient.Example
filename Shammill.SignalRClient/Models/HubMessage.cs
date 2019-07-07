@@ -8,5 +8,6 @@ namespace Shammill.SignalRClientExample.Models
     {
         public string userId;
         public string content;
+        public string data;
     }
 }

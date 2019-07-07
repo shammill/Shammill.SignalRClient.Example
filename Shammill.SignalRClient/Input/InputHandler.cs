@@ -37,6 +37,32 @@ namespace Shammill.SignalRClientExample.Input
                     else output = "Failed To Create Lobby";
                 }
 
+                if (input.ToLower().StartsWith("signalrcreatelobby"))
+                {
+                    //var param = input.GetParameter();
+                    signalRClient.CreateLobby();
+                    //if (!String.IsNullOrEmpty(lobbyId))
+                    //{
+                    //    output = $"Created Lobby. Id: {lobbyId}";
+                    //    signalRClient.AddToSignalRGroup(lobbyId);
+                    //}
+
+                    //else output = "Failed To Create Lobby";
+                }
+
+                if (input.ToLower().StartsWith("signalrdeletelobby"))
+                {
+                    var param = input.GetParameter();
+
+                    //if (!String.IsNullOrEmpty(lobbyId))
+                    //{
+                    //    output = $"Created Lobby. Id: {lobbyId}";
+                        signalRClient.DeleteLobby(new Guid(param));
+                    //}
+
+                    //else output = "Failed To Create Lobby";
+                }
+
                 if (input.ToLower().StartsWith("deletelobby"))
                 {
                     var param = input.GetParameter();

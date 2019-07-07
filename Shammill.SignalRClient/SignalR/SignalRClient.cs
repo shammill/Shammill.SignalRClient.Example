@@ -55,6 +55,12 @@ namespace Shammill.SignalRClientExample.SignalR
                 }
             };
 
+            Connection.On<Lobby>("LobbyCreated", (message) =>
+            {
+                Console.WriteLine("Lobby Created Message From SignalR Hub");
+                Console.WriteLine($"{message.Id.ToString()}");
+            });
+
             Connection.On<HubMessage>("LobbyUpdated", (message) =>
             {
                 Console.WriteLine("Got Lobby Updated Message From SignalR Hub");
@@ -67,10 +73,10 @@ namespace Shammill.SignalRClientExample.SignalR
                 Console.WriteLine($"{message}");
             });
 
-            Connection.On<HubMessage>("LobbyDeleted", (message) =>
+            Connection.On<Guid>("LobbyDeleted", (message) =>
             {
                 Console.WriteLine("Got Lobby Deleted Message From SignalR Hub");
-                Console.WriteLine($"{message.content}");
+                Console.WriteLine($"{message}");
             });
 
             Connection.On<HubMessage>("PlayerAddedToLobby", (message) =>
@@ -110,6 +116,19 @@ namespace Shammill.SignalRClientExample.SignalR
         public void AddToSignalRGroup(string group)
         {
             Connection.SendAsync("AddToGroup", group);
+        }
+
+        public void CreateLobby()
+        {
+            Lobby lobby = new Lobby();
+            lobby.Name = "My New Lobby";
+            lobby.Region = RegionEnum.Australia;
+            Connection.SendAsync("CreateLobby", lobby);
+        }
+
+        public void DeleteLobby(Guid lobbyId)
+        {
+            Connection.SendAsync("DeleteLobby", lobbyId);
         }
     }
 }

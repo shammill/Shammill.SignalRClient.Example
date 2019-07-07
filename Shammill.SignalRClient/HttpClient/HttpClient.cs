@@ -53,7 +53,7 @@ namespace Shammill.SignalRClientExample.HttpClient
             //request.AddParameter("lobbyId", lobbyId);
 
             var response = client.Execute<bool>(request);
-            var success = response.Data;
+            var success = response.StatusCode == System.Net.HttpStatusCode.OK;
             return success;
         }
 
